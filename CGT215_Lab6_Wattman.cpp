@@ -11,19 +11,19 @@ using namespace sf;
 int main()
 {
     string background = "images/backgrounds/winter.png";
-    string foreground = "images/characters/yoda.png";
+    string foreground = "images/characters/Rey.png";
 
     Texture backgroundTex;
     if (!backgroundTex.loadFromFile(background))
     {
-        cout << "Couldn't Load Image" << endl;
+        cout << "Couldn't Load Background Image" << endl;
         exit(1);
     }
 
     Texture foregroundTex;
     if (!foregroundTex.loadFromFile(foreground))
     {
-        cout << "Couldn't Load Image" << endl;
+        cout << "Couldn't Load Character Image" << endl;
         exit(1);
     }
 
@@ -39,7 +39,16 @@ int main()
         {
             //these 2 loops will run the code for each pixel in the background image
 
-            Color example = foregroundImage.getPixel(x, y); //access current pizel at x,y
+            Color winterC = backgroundImage.getPixel(x, y); //access current pixel at x,y in the background image
+            Color reyC = foregroundImage.getPixel(x, y); //access current pixel at x,y in foreground image
+
+            //RGB values for the green screen are r=16, g=244, and b=22 (found after taking image inot Photoshop)
+            if ((reyC.r == 16) && (reyC.g == 244) && (reyC.b == 22))
+            {
+                foregroundImage.setPixel(x, y, winterC);
+            }
+
+
             //color objects store the individual channel values at like example.g for the green value
         }
     }
