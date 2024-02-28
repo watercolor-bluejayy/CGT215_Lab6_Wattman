@@ -10,11 +10,11 @@ using namespace sf;
 
 int main()
 {
-    string background = "images/backgrounds/winter.png";
-    string foreground = "images/characters/Rey.png";
+    string background = "images/backgrounds/winter.png"; //accesses background image, can be easily swapped for different image if need be
+    string foreground = "images/characters/Rey.png"; //same as above but for the foreground/character image
 
     Texture backgroundTex;
-    if (!backgroundTex.loadFromFile(background))
+    if (!backgroundTex.loadFromFile(background)) //let's you know if it couldn't find the image file where you said it would be
     {
         cout << "Couldn't Load Background Image" << endl;
         exit(1);
@@ -43,7 +43,8 @@ int main()
             Color reyC = foregroundImage.getPixel(x, y); //access current pixel at x,y in foreground image
 
             //RGB values for the green screen are r=16, g=244, and b=22 (found after taking image inot Photoshop)
-            if ((reyC.r == 16) && (reyC.g == 244) && (reyC.b == 22))
+            //exact values didn't work great, forgot to take shading near character into account
+            if ((reyC.r == 32) && (reyC.g == 214) && (reyC.b == 23))
             {
                 foregroundImage.setPixel(x, y, winterC);
             }
@@ -53,7 +54,7 @@ int main()
         }
     }
     
-    //by default, just show foreground image
+  
     RenderWindow window(VideoMode(1024, 786), "Here's the output");
     Sprite sprite1;
     Texture tex1;
